@@ -15,52 +15,33 @@ nr_numbers = int(input("How many numbers would you like?\n"))
 #easy way
 
 for num in range(1, nr_letters + 1):
-    letterIndex = random.randint(0, len(letters) - 1)
-    final_password_easy += letters[letterIndex]
+    final_password_easy += random.choice(letters)
 
 for num in range(1, nr_symbols + 1):
-    symbolIndex = random.randint(0, len(symbols) - 1)
-    final_password_easy += symbols[symbolIndex]
+     final_password_easy += random.choice(symbols)
 
 for num in range(1, nr_numbers + 1):
-    numberIndex = random.randint(0, len(numbers) - 1)
-    final_password_easy += numbers[numberIndex]
+    final_password_easy += random.choice(numbers)
 
 print("Your easy password is: " + final_password_easy)
 
 
 #slightly harder way
 
-character = 0
-charsRemaining = nr_letters
-numsRemaining = nr_numbers
-symbolsRemaining = nr_symbols
+password_list = []
+for char in range(1, nr_letters + 1):
+    password_list.append(random.choice(letters))
+
+for char in range(1, nr_symbols + 1):
+    password_list.append(random.choice(symbols))
+
+for char in range(1, nr_numbers + 1):
+    password_list.append(random.choice(numbers))
 
 
-total_chars = charsRemaining + numsRemaining + symbolsRemaining
-
-for i in range(0, total_chars + 1):
-
-    condition = False
-    while condition == False:
-        charType = random.randint(0, 2) # 0 - letter, 1 - symbol , 2 - number
-        charToAdd = ""
-        if charType == 0 and charsRemaining > 0:
-            charIndex = random.randint(0, len(letters) - 1)
-            charToAdd = letters[charIndex]
-            condition = True
-        elif charType == 1 and symbolsRemaining > 0:
-            charIndex = random.randint(0, len(symbols) - 1)
-            charToAdd = symbols[charIndex]
-            condition = True
-        elif charType == 2 and numsRemaining > 0:
-            charIndex = random.randint(0, len(numbers) - 1)
-            charToAdd = numbers[charIndex]
-            condition = True
-        else:
-            condition = False
-
-        if condition == True:
-            final_password_hard += charToAdd
+random.shuffle(password_list)  # put list of nums, symbols, letters in random order2
+final_password_hard = ""
+for char in password_list:
+    final_password_hard += char
 
 print("Your hard password is: " + final_password_hard)
