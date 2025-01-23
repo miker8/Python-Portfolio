@@ -29,6 +29,8 @@ for num in range(1, nr_numbers + 1):
 print("Your easy password is: " + final_password_easy)
 
 
+#slightly harder way
+
 character = 0
 charsRemaining = nr_letters
 numsRemaining = nr_numbers
@@ -41,23 +43,24 @@ for i in range(0, total_chars + 1):
 
     condition = False
     while condition == False:
-        charType = random.randint(0, 2)
+        charType = random.randint(0, 2) # 0 - letter, 1 - symbol , 2 - number
+        charToAdd = ""
         if charType == 0 and charsRemaining > 0:
             charIndex = random.randint(0, len(letters) - 1)
             charToAdd = letters[charIndex]
-            final_password_hard += charToAdd
             condition = True
         elif charType == 1 and symbolsRemaining > 0:
             charIndex = random.randint(0, len(symbols) - 1)
             charToAdd = symbols[charIndex]
-            final_password_hard += charToAdd
             condition = True
         elif charType == 2 and numsRemaining > 0:
-            charIndex = random.randint(0, len(symbols) - 1)
-            charToAdd =numbers[charIndex]
-            final_password_hard += charToAdd
+            charIndex = random.randint(0, len(numbers) - 1)
+            charToAdd = numbers[charIndex]
             condition = True
         else:
             condition = False
+
+        if condition == True:
+            final_password_hard += charToAdd
 
 print("Your hard password is: " + final_password_hard)
